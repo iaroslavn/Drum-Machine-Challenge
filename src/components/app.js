@@ -48,15 +48,21 @@ class App extends Component {
   }
 
   playSound(eventObj) {
-    //code to be run when click event is fired goes below this line!
-
+    const soundName = eventObj.currentTarget.id;
+    const sound = Sounds[soundName];
+    sound.currentTime = 0;
+    sound.play();
   }
 
   render(){
+    const buttons = [];
+    for (let i = 0; i < this.state.sounds.length; i++) {
+      buttons.push(<Button sound={this.state.sounds[i]} playSound={this.playSound} key={'button-' + i} />);
+    }
 
     return (
       <div className='button-container'>
-      {/* Components that need to be returned from App go below here ! */}
+       {buttons}
       </div>
     );
   }
